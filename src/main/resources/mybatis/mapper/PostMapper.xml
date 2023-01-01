@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tutoring.review.domain.post.dao.PostMapper">
+    <select id="selectPosts" resultType="com.tutoring.review.domain.post.entity.Post">
+        SELECT id,
+               user_id,
+               content,
+               `like`,
+               created_at,
+               updated_at
+        FROM post
+    </select>
+
+    <insert id="insertPosts" parameterType="com.tutoring.review.domain.post.dto.PostRequest">
+        INSERT INTO post
+            (
+            user_id,
+            content
+        )
+        value (
+            #{useId},
+            #{content}
+            )
+    </insert>
+</mapper>
