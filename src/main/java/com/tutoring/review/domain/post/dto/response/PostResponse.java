@@ -1,4 +1,4 @@
-package com.tutoring.review.domain.post.dto;
+package com.tutoring.review.domain.post.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

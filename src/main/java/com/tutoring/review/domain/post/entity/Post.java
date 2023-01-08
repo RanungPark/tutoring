@@ -1,8 +1,10 @@
 package com.tutoring.review.domain.post.entity;
 
+import com.tutoring.review.domain.post.dto.response.PostIdResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+
 import java.time.LocalDateTime;
 
 // @Getter get을 하지 않고 접근자를 생성할수 있다
@@ -22,4 +24,10 @@ public class Post {
     private Long like;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public PostIdResponse toPostIdResponse() {
+        return Post.builder()
+                .id(id)
+                .build().toPostIdResponse();
     }
+}

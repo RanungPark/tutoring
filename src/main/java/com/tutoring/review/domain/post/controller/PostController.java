@@ -1,18 +1,19 @@
 package com.tutoring.review.domain.post.controller;
 
 import com.tutoring.review.domain.post.dto.PostRequest;
-import com.tutoring.review.domain.post.dto.PostResponse;
+import com.tutoring.review.domain.post.dto.response.PostResponse;
 import com.tutoring.review.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 // @Controller 해당 어노테이션이 적용된 클래스는 Controller임을 나타내고, bean으로 등록되면 해당 클래스가
 // Controller로 사용됨을 Spring Framework에 알린다
 // @RequestMapping 어노테이션으로, 요청 url값과 Http Method를 정의해주는 곳
@@ -35,8 +36,21 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> insertPosts(@RequestBody PostRequest postRequest) {
+    public ResponseEntity<List<PostResponse>> insertPosts(@Valid @RequestBody PostRequest postRequest) {
         postService.insertPosts(postRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.ok().build();
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
+        Map<String, Object> body = new HashMap<>();
+
+        String errorMessage = e.getBindingResult()
+                .getAllErrors()
+                .get(0)
+                .getDefaultMessage();
+        body.put("messages", errorMessage);
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 }

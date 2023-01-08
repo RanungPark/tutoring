@@ -14,14 +14,14 @@
         FROM post
     </select>
 
-    <insert id="insertPosts" parameterType="com.tutoring.review.domain.post.dto.PostRequest">
+    <insert id="insertPosts" parameterType="com.tutoring.review.domain.post.dto.request.PostRequest">
         INSERT INTO post
             (
             user_id,
             content
         )
         value (
-            #{useId},
+            #{userId},
             #{content}
             )
     </insert>

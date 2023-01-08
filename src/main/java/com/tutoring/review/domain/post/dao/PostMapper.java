@@ -1,6 +1,5 @@
 package com.tutoring.review.domain.post.dao;
 
-import com.tutoring.review.domain.post.dto.PostRequest;
 import com.tutoring.review.domain.post.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -16,5 +15,5 @@ import java.util.List;
 public interface PostMapper {
     List<Post> selectPosts();
 
-    void insertPosts(PostRequest postRequest);
+    Post insertPosts(Post post);
 }

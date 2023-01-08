@@ -2,7 +2,7 @@ package com.tutoring.review.domain.post.service;
 
 import com.tutoring.review.domain.post.dao.PostMapper;
 import com.tutoring.review.domain.post.dto.PostRequest;
-import com.tutoring.review.domain.post.dto.PostResponse;
+import com.tutoring.review.domain.post.dto.response.PostResponse;
 import com.tutoring.review.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,11 @@ public class PostService {
     }
 
     @Transactional
-    public void insertPosts(PostRequest postRequest) {
-        postMapper.insertPosts(postRequest);
+    public List<PostResponse> insertPosts(PostRequest postRequest) {
+
+        Post savePost = postRequest.toEntity();
+        Post post = postMapper.insertPosts(savePost);
+
+        return insertPosts(postRequest);
     }
 }
