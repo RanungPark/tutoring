@@ -1,7 +1,7 @@
 package com.tutoring.review.domain.post.service;
 
 import com.tutoring.review.domain.post.dao.PostMapper;
-import com.tutoring.review.domain.post.dto.PostRequest;
+import com.tutoring.review.domain.post.dto.request.PostRequest;
 import com.tutoring.review.domain.post.dto.response.PostResponse;
 import com.tutoring.review.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
@@ -40,11 +40,17 @@ public class PostService {
     }
 
     @Transactional
-    public List<PostResponse> insertPosts(PostRequest postRequest) {
+    public PostResponse insertPost(PostRequest postRequest) {
+        Post post = postRequest.toEntity();
+        postMapper.insertPost(post);
 
-        Post savePost = postRequest.toEntity();
-        Post post = postMapper.insertPosts(savePost);
+        PostResponse postResponse = PostResponse.builder()
+                .id(post.getId())
+                .userId(post.getUserId())
+                .content(post.getContent())
+                .like(post.getLike())
+                .build();
 
-        return insertPosts(postRequest);
+        return postResponse;
     }
 }

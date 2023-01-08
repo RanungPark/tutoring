@@ -14,7 +14,7 @@
         FROM post
     </select>
 
-    <insert id="insertPosts" parameterType="com.tutoring.review.domain.post.dto.request.PostRequest">
+    <insert id="insertPost" parameterType="com.tutoring.review.domain.post.entity.Post">
         INSERT INTO post
             (
             user_id,

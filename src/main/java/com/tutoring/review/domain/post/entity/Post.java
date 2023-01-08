@@ -25,9 +25,4 @@ public class Post {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public PostIdResponse toPostIdResponse() {
-        return Post.builder()
-                .id(id)
-                .build().toPostIdResponse();
-    }
 }
