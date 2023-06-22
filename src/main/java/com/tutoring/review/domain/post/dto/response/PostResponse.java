@@ -1,9 +1,11 @@
 package com.tutoring.review.domain.post.dto.response;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Builder
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class PostResponse {
     private Long id;

@@ -1,6 +1,5 @@
 package com.tutoring.review.domain.post.entity;
 
-import com.tutoring.review.domain.post.dto.response.PostIdResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

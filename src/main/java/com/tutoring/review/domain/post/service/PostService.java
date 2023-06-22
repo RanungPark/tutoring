@@ -39,17 +39,35 @@ public class PostService {
         return postsResponse;
     }
 
+    /*
+    게시물을 새로 만드는 컨트롤러
+     */
     @Transactional
     public PostResponse insertPost(PostRequest postRequest) {
         Post post = postRequest.toEntity();
         postMapper.insertPost(post);
 
+        System.out.println(postRequest.getData().toString());
+
+        PostResponse postResponse1 = new PostResponse(
+                1L,
+                1L,
+                "안녕하세요",
+                0L
+        );
+
+
+
+
         PostResponse postResponse = PostResponse.builder()
-                .id(post.getId())
-                .userId(post.getUserId())
-                .content(post.getContent())
-                .like(post.getLike())
+                .id(1L)
+                .userId(1L)
+                .content("안녕하세요")
+                .like(0L)
                 .build();
+
+
+
 
         return postResponse;
     }
